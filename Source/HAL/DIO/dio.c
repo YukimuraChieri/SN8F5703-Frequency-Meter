@@ -1,23 +1,86 @@
 #include "dio.h"
 
-void DIO_P0_Init(uint8_t port)
+/* 初始化函数 */
+void HAL_GPIO_Init(uint8_t GPIOx, GPIO_InitTypeDef* GPIO_Init)
 {
-	P0M |= (0x01 << port);		/* 输出模式 */
-	P0OC &= ~(0x01 << port);	/* 禁用开漏 */
-	P0UR &= ~(0x01 << port);	/* 禁用上拉 */
+	if (GPIOx == P0)	/* P0端口初始化 */
+	{
+		switch(GPIO_Init->Mode)
+		{
+			case GPIO_MODE_INPUT: {
+				P0M &= ~GPIO_Init->Pin;	/* 输入模式 */
+			}break;
+			
+			case GPIO_MODE_OUTPUT_PP: {
+				P0M |= GPIO_Init->Pin;	/* 输出模式 */
+				P0OC &= ~GPIO_Init->Pin;/* 禁用开漏 */
+			}break;
+			
+			case GPIO_MODE_OUTPUT_OC: {
+				P0M |= GPIO_Init->Pin;	/* 输出模式 */
+				P0OC |= GPIO_Init->Pin;	/* 使能开漏 */
+			}break;
+		}
+		
+		if (GPIO_Init->Pull)
+		{
+			P0UR |= GPIO_Init->Pin;		/* 使能上拉 */
+		}
+		else
+		{
+			P0UR &= ~GPIO_Init->Pin;	/* 禁用上拉 */
+		}
+	}
+	else if (GPIOx == P1)	/* P1端口初始化 */
+	{
+		switch(GPIO_Init->Mode)
+		{
+			case GPIO_MODE_INPUT: {
+				P1M &= ~GPIO_Init->Pin;	/* 输入模式 */
+			}break;
+			
+			case GPIO_MODE_OUTPUT_PP: {
+				P1M |= GPIO_Init->Pin;	/* 输出模式 */
+			}break;
+			
+			default: break;
+		}
+		
+		if (GPIO_Init->Pull)
+		{
+			P1UR |= GPIO_Init->Pin;		/* 使能上拉 */
+		}
+		else
+		{
+			P1UR &= ~GPIO_Init->Pin;	/* 禁用上拉 */
+		}
+	}
+	else if (GPIOx == P2)	/* P2端口初始化 */
+	{
+		if (GPIO_Init->Pin <= GPIO_Pin_5)
+		{
+			switch(GPIO_Init->Mode)
+			{
+				case GPIO_MODE_INPUT: {
+					P1M &= ~GPIO_Init->Pin;	/* 输入模式 */
+				}break;
+				
+				case GPIO_MODE_OUTPUT_PP: {
+					P1M |= GPIO_Init->Pin;	/* 输出模式 */
+				}break;
+				
+				default: break;
+			}
+		
+			if (GPIO_Init->Pull)
+			{
+				P1UR |= GPIO_Init->Pin;		/* 使能上拉 */
+			}
+			else
+			{
+				P1UR &= ~GPIO_Init->Pin;	/* 禁用上拉 */
+			}
+		}
+	}
 }
-
-void DIO_P1_Init(uint8_t port)
-{
-	P1M |= (0x01 << port);		/* 输出模式 */
-	P1OC &= ~(0x01 << port);	/* 禁用开漏 */
-	P1UR &= ~(0x01 << port);	/* 禁用上拉 */
-}
-
-//void DIO_P2_Init(uint8_t port)
-//{
-//	P2M |= (0x01 << port);		/* 输出模式 */
-//	P2OC &= ~(0x01 << port);	/* 禁用开漏 */
-//	P2UR &= ~(0x01 << port);	/* 禁用上拉 */
-//}
 
