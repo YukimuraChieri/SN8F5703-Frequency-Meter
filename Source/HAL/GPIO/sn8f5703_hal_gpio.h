@@ -1,7 +1,10 @@
-#ifndef __DIO_H
-#define __DIO_H
+#ifndef __SN8F5703_HAL_GPIO_H
+#define __SN8F5703_HAL_GPIO_H
 
 #include "SN8F5703.h"
+
+#define GPIO_PIN_SET    1
+#define GPIO_PIN_RESET  0
 
 #define GPIO_Pin_0	((uint8_t)0x01)  /*!< Pin 0 selected */
 #define GPIO_Pin_1	((uint8_t)0x02)  /*!< Pin 1 selected */
@@ -19,6 +22,13 @@ typedef enum
   GPIO_MODE_OUTPUT_OC,	/* 输出开漏模式 */
 }GPIO_ModeTypeDef;
 
+typedef enum
+{
+  Port0,                /* P0端口 */
+  Port1,                /* P1端口 */
+  Port2,                /* P2端口 */
+}GPIO_PortTypeDef;
+
 typedef struct
 {
 	uint8_t Pin;
@@ -26,9 +36,9 @@ typedef struct
 	uint8_t Pull;
 }GPIO_InitTypeDef;
 
-#define HAL_GPIO_WritePin(port, pin, pinState) (port)=(pinState)
-#define HAL_GPIO_ReadPin(port, pin) (port)
-void HAL_GPIO_Init(uint8_t GPIOx, GPIO_InitTypeDef* GPIO_Init);
+void HAL_GPIO_Init(GPIO_PortTypeDef GPIOx, GPIO_InitTypeDef* GPIO_Init);
+void HAL_GPIO_WritePin(GPIO_PortTypeDef GPIOx, uint8_t GPIO_Pin, uint8_t pinState);
+uint8_t HAL_GPIO_ReadPin(GPIO_PortTypeDef GPIOx, uint8_t GPIO_Pin);
 
 #endif
 

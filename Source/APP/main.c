@@ -1,46 +1,27 @@
-#include "SN8F5703.h"
-//#include "key.h"
-//#include "led.h"
-//#include "seg.h"
+#include "sn8f5703_hal_delay.h"
+#include "sn8f5703_hal_gpio.h"
+#include "fml_key.h"
+#include "fml_led.h"
+#include "fml_seg.h"
 
-/* 毫秒级延时函数 */
-void delay_ms(uint16_t tm)
-{
-	uint16_t i, j;
-	for (i = 0; i < tm; i++)
-	{
-		for (j = 0; j < 1000; j++);
-	}
-}
-
-/* 初始化系统时钟 */
-void system_init(void)
-{
-	CKCON = 0x70;		/* For change safely the system clock */
-	CLKSEL = 0x05;	/* Fcpu=Fosc/4=8MHz */
-	CLKCMD = 0x69;	/* Apply CLKSEL’s setting */
-	CKCON = 0x00;		/* IROM fetch = fcpu / 1 */
-}
-
-void func(uint8_t port)
-{
-	port++;
-}
-	
 /* 主函数 */
 int main(void)
 {
-	system_init();	/* 初始化系统时钟 */
-	
-	P0M |= (0x01 << 4);		/* 输出模式 */
-	P0OC &= ~(0x01 << 4);	/* 禁用开漏 */
-	P0UR &= ~(0x01 << 4);	/* 禁用上拉 */	
+	GPIO_InitTypeDef GPIO_InitStructure;
+
+	SystemClock_Init();	/* 初始化系统时钟 */
+
+	/* P04引脚初始化 */
+    GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStructure.Pin = GPIO_Pin_4;
+    GPIO_InitStructure.Pull = 1;
+    HAL_GPIO_Init(Port0, &GPIO_InitStructure);
 	
 	while(1)
 	{
-		P04 = 1;
+		HAL_GPIO_WritePin(Port0, GPIO_Pin_4, GPIO_PIN_SET);
 		delay_ms(1000);
-		P04 = 0;
+		HAL_GPIO_WritePin(Port0, GPIO_Pin_4, GPIO_PIN_RESET);
 		delay_ms(1000);
 	}
 	
