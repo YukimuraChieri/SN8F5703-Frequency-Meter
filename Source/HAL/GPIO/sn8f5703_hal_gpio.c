@@ -142,7 +142,7 @@ void HAL_GPIO_WritePin(GPIO_PortTypeDef GPIOx, uint8_t GPIO_Pin, uint8_t pinStat
 /* 引脚读取函数 */
 uint8_t HAL_GPIO_ReadPin(GPIO_PortTypeDef GPIOx, uint8_t GPIO_Pin)
 {
-	uint8_t ret = 0;
+	uint8_t ret = GPIO_PIN_RESET;
 
 	switch(GPIOx)	/* 选择GPIO端口 */
 	{
