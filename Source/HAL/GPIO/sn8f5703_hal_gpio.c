@@ -29,7 +29,7 @@ void HAL_GPIO_Init(GPIO_PortTypeDef GPIOx, GPIO_InitTypeDef* GPIO_Init)
 				{
 					P0OC |= GPIO_Init->Pin;			/* 使能开漏 */
 				}
-				else if (GPIO_Init->Pin <= GPIO_Pin_6)
+				else if ((GPIO_Init->Pin >= GPIO_Pin_4) && (GPIO_Init->Pin <= GPIO_Pin_6))
 				{
 					P0OC |= (GPIO_Init->Pin << 2);	/* 使能开漏 */
 				}
@@ -77,11 +77,11 @@ void HAL_GPIO_Init(GPIO_PortTypeDef GPIOx, GPIO_InitTypeDef* GPIO_Init)
 			switch(GPIO_Init->Mode)
 			{
 				case GPIO_MODE_INPUT: {
-					P1M &= ~GPIO_Init->Pin;	/* 输入模式 */
+					P2M &= ~GPIO_Init->Pin;	/* 输入模式 */
 				}break;
 				
 				case GPIO_MODE_OUTPUT_PP: {
-					P1M |= GPIO_Init->Pin;	/* 输出模式 */
+					P2M |= GPIO_Init->Pin;	/* 输出模式 */
 				}break;
 				
 				default: break;
@@ -89,11 +89,11 @@ void HAL_GPIO_Init(GPIO_PortTypeDef GPIOx, GPIO_InitTypeDef* GPIO_Init)
 		
 			if (GPIO_Init->Pull)
 			{
-				P1UR |= GPIO_Init->Pin;		/* 使能上拉 */
+				P2UR |= GPIO_Init->Pin;		/* 使能上拉 */
 			}
 			else
 			{
-				P1UR &= ~GPIO_Init->Pin;	/* 禁用上拉 */
+				P2UR &= ~GPIO_Init->Pin;	/* 禁用上拉 */
 			}
 		}
 	}
@@ -147,15 +147,15 @@ uint8_t HAL_GPIO_ReadPin(GPIO_PortTypeDef GPIOx, uint8_t GPIO_Pin)
 	switch(GPIOx)	/* 选择GPIO端口 */
 	{
 		case Port0: {	/* P0端口 */
-			ret = P0 & GPIO_Pin;	/* 通过位与操作读取某个Pin脚的电平 */
+			ret = (P0 & GPIO_Pin)?GPIO_PIN_SET:GPIO_PIN_RESET;	/* 通过位与操作读取某个Pin脚的电平 */
 		}break;
 
 		case Port1: {	/* P1端口 */
-			ret = P1 & GPIO_Pin;
+			ret = (P0 & GPIO_Pin)?GPIO_PIN_SET:GPIO_PIN_RESET;
 		}break;
 
 		case Port2: {	/* P2端口 */
-			ret = P2 & GPIO_Pin;
+			ret = (P0 & GPIO_Pin)?GPIO_PIN_SET:GPIO_PIN_RESET;
 		}break;
 	}
 	return ret;
