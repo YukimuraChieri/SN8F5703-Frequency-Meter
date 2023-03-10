@@ -37,7 +37,7 @@ void HAL_GPIO_Init(GPIO_PortTypeDef GPIOx, GPIO_InitTypeDef* GPIO_Init)
 			}break;
 		}
 		
-		if (GPIO_Init->Pull)
+		if (GPIO_PULLUP == GPIO_Init->Pull)
 		{
 			P0UR |= GPIO_Init->Pin;		/* 使能上拉 */
 		}

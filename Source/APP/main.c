@@ -10,6 +10,7 @@ void main(void)
 {
 	SystemClock_Init();	/* 初始化系统时钟 */
 	
+	FML_KEY_Init();		/* 初始化KEY */
 	FML_LED_Init();		/* 初始化LED */
 	FML_SEG_Init();		/* 初始化数码管 */
 	
@@ -20,13 +21,13 @@ void main(void)
 		switch (num%8)
 		{
 			case 0:	FML_LED_Display(LED1);	break;	/* LED1显示 */
-			case 1:	FML_LED_Display(LED2);	break;	/* LED1显示 */
-			case 2:	FML_LED_Display(LED3);	break;	/* LED1显示 */
-			case 3:	FML_LED_Display(LED4);	break;	/* LED1显示 */
-			case 4:	FML_LED_Display(LED5);	break;	/* LED1显示 */
-			case 5:	FML_LED_Display(LED6);	break;	/* LED1显示 */
-			case 6:	FML_LED_Display(LED7);	break;	/* LED1显示 */
-			case 7:	FML_LED_Display(LED8);	break;	/* LED1显示 */
+			case 1:	FML_LED_Display(LED2);	break;	/* LED2显示 */
+			case 2:	FML_LED_Display(LED3);	break;	/* LED3显示 */
+			case 3:	FML_LED_Display(LED4);	break;	/* LED4显示 */
+			case 4:	FML_LED_Display(LED5);	break;	/* LED5显示 */
+			case 5:	FML_LED_Display(LED6);	break;	/* LED6显示 */
+			case 6:	FML_LED_Display(LED7);	break;	/* LED7显示 */
+			case 7:	FML_LED_Display(LED8);	break;	/* LED8显示 */
 		}
 		
 		HAL_Delay(150);
