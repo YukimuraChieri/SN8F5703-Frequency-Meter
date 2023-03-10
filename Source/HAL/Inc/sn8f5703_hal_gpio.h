@@ -4,22 +4,26 @@
 #include "SN8F5703.h"
 
 /* 引脚状态定义 */
-#define GPIO_PIN_SET    1
-#define GPIO_PIN_RESET  0
+typedef enum
+{
+  GPIO_PIN_RESET = 0u,
+  GPIO_PIN_SET
+}GPIO_PinState;
+
+/* 引脚定义 */
+#define GPIO_Pin_0		((uint8_t)0x01)  /*!< Pin 0 selected */
+#define GPIO_Pin_1		((uint8_t)0x02)  /*!< Pin 1 selected */
+#define GPIO_Pin_2		((uint8_t)0x04)  /*!< Pin 2 selected */
+#define GPIO_Pin_3		((uint8_t)0x08)  /*!< Pin 3 selected */
+#define GPIO_Pin_4		((uint8_t)0x10)  /*!< Pin 4 selected */
+#define GPIO_Pin_5		((uint8_t)0x20)  /*!< Pin 5 selected */
+#define GPIO_Pin_6		((uint8_t)0x40)  /*!< Pin 6 selected */
+#define GPIO_Pin_7		((uint8_t)0x80)  /*!< Pin 7 selected */
+#define GPIO_PIN_All	((uint8_t)0xFF)  /* All pins selected */
 
 /* 引脚上拉定义 */
-#define GPIO_PULLUP     1
-#define GPIO_NOPULL     0
-
-/* 引脚号定义 */
-#define GPIO_Pin_0	((uint8_t)0x01)  /*!< Pin 0 selected */
-#define GPIO_Pin_1	((uint8_t)0x02)  /*!< Pin 1 selected */
-#define GPIO_Pin_2	((uint8_t)0x04)  /*!< Pin 2 selected */
-#define GPIO_Pin_3	((uint8_t)0x08)  /*!< Pin 3 selected */
-#define GPIO_Pin_4	((uint8_t)0x10)  /*!< Pin 4 selected */
-#define GPIO_Pin_5	((uint8_t)0x20)  /*!< Pin 5 selected */
-#define GPIO_Pin_6	((uint8_t)0x40)  /*!< Pin 6 selected */
-#define GPIO_Pin_7	((uint8_t)0x80)  /*!< Pin 7 selected */
+#define GPIO_NOPULL     0u
+#define GPIO_PULLUP     1u
 
 /* GPIO模式枚举 */
 typedef enum

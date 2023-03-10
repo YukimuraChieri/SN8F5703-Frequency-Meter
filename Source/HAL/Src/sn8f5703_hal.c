@@ -1,4 +1,4 @@
-#include "sn8f5703_hal_delay.h"
+#include "sn8f5703_hal.h"
 
 /* 初始化系统时钟 */
 void SystemClock_Init(void)
@@ -12,7 +12,7 @@ void SystemClock_Init(void)
 /* 毫秒级延时函数 */
 void HAL_Delay(uint16_t Delay)
 {
-    uint16_t i, j;
+	uint16_t i, j;
 	for (i = 0; i < Delay; i++)
 	{
 		for (j = 0; j < 1000; j++);

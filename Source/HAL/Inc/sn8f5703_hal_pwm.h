@@ -30,11 +30,11 @@
 /* PWM初始化结构体定义 */
 typedef struct
 {
-    uint8_t ClockDivision;  /* PWM时钟分频 */
-    uint16_t Period;        /* 周期 */
-    uint8_t Pulse;          /* PWM占空比 */
-    uint8_t OCPolarity_1X;  /* PWM1X输出极性 */
-    uint8_t OCPolarity_2X;  /* PWM2X输出极性 */
+	uint16_t Period;        /* 周期 */
+	uint16_t Pulse;					/* PWM占空比 */
+	uint8_t ClockDivision;  /* PWM时钟分频 */
+	uint8_t OCPolarity_1X;  /* PWM1X输出极性 */
+	uint8_t OCPolarity_2X;  /* PWM2X输出极性 */
 }PWM_InitTypeDef;
 
 /* HAL层PWM模块类函数宏定义接口 */

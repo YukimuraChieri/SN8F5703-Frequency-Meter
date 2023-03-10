@@ -140,24 +140,24 @@ void HAL_GPIO_WritePin(GPIO_PortTypeDef GPIOx, uint8_t GPIO_Pin, uint8_t pinStat
 }
 
 /* 引脚读取函数 */
-uint8_t HAL_GPIO_ReadPin(GPIO_PortTypeDef GPIOx, uint8_t GPIO_Pin)
+GPIO_PinState HAL_GPIO_ReadPin(GPIO_PortTypeDef GPIOx, uint8_t GPIO_Pin)
 {
-	uint8_t ret = GPIO_PIN_RESET;
+	GPIO_PinState bitstatus = GPIO_PIN_RESET;
 
 	switch(GPIOx)	/* 选择GPIO端口 */
 	{
 		case Port0: {	/* P0端口 */
-			ret = (P0 & GPIO_Pin)?GPIO_PIN_SET:GPIO_PIN_RESET;	/* 通过位与操作读取某个Pin脚的电平 */
+			bitstatus = (P0 & GPIO_Pin)?GPIO_PIN_SET:GPIO_PIN_RESET;	/* 通过位与操作读取某个Pin脚的电平 */
 		}break;
 
 		case Port1: {	/* P1端口 */
-			ret = (P0 & GPIO_Pin)?GPIO_PIN_SET:GPIO_PIN_RESET;
+			bitstatus = (P1 & GPIO_Pin)?GPIO_PIN_SET:GPIO_PIN_RESET;
 		}break;
 
 		case Port2: {	/* P2端口 */
-			ret = (P0 & GPIO_Pin)?GPIO_PIN_SET:GPIO_PIN_RESET;
+			bitstatus = (P2 & GPIO_Pin)?GPIO_PIN_SET:GPIO_PIN_RESET;
 		}break;
 	}
-	return ret;
+	return bitstatus;
 }
 

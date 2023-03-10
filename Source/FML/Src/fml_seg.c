@@ -26,7 +26,6 @@ void FML_SEG_Init(void)
 /* 数码管显示函数 */
 void FML_SEG_Display(uint8_t dig, uint8_t seg)
 {
-	
 	HDL_TM1628_SendCMD(DIG_CODE[dig]);		/* TM1628写入地址 */
 	HDL_TM1628_WriteByte(SEG_CODE[seg]);	/* TM1628写入数据 */	
 	HAL_GPIO_WritePin(Port2, GPIO_Pin_0, GPIO_PIN_SET);	/* CS引脚置高 */

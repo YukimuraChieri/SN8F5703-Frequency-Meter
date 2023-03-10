@@ -1,5 +1,5 @@
-#ifndef __SN8F5703_HAL_DELAY_H
-#define __SN8F5703_HAL_DELAY_H
+#ifndef __SN8F5703_HAL_H
+#define __SN8F5703_HAL_H
 
 #include "SN8F5703.h"
 
