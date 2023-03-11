@@ -12,14 +12,14 @@
 #define PWM_CHANNEL_22  ((uint8_t)0x40)
 
 /* PWM时钟分频定义 */
-#define PWM_CLKDIV_128  ((uint8_t)0x00)
-#define PWM_CLKDIV_64   ((uint8_t)0x10)
-#define PWM_CLKDIV_32   ((uint8_t)0x20)
-#define PWM_CLKDIV_16   ((uint8_t)0x30)
-#define PWM_CLKDIV_8    ((uint8_t)0x40)
-#define PWM_CLKDIV_4    ((uint8_t)0x50)
-#define PWM_CLKDIV_2    ((uint8_t)0x60)
-#define PWM_CLKDIV_1    ((uint8_t)0x70)
+#define PWM_FOSC_DIV128	((uint8_t)0x00)
+#define PWM_FOSC_DIV64 	((uint8_t)0x10)
+#define PWM_FOSC_DIV32 	((uint8_t)0x20)
+#define PWM_FOSC_DIV16 	((uint8_t)0x30)
+#define PWM_FOSC_DIV8  	((uint8_t)0x40)
+#define PWM_FOSC_DIV4  	((uint8_t)0x50)
+#define PWM_FOSC_DIV2  	((uint8_t)0x60)
+#define PWM_FOSC_DIV1  	((uint8_t)0x70)
 
 /* PWM输出极性定义 */
 #define PWM1X_OCPolarity_HIGH   ((uint8_t)0x04)
@@ -37,14 +37,12 @@ typedef struct
 	uint8_t OCPolarity_2X;  /* PWM2X输出极性 */
 }PWM_InitTypeDef;
 
-/* HAL层PWM模块类函数宏定义接口 */
-#define __HAL_TIM_SET_COMPARE(__COMPARE__) PW1D = ((uint16_t)__COMPARE__)
-#define __HAL_PWM_SET_PERIOD(__PERIOD__) PW1Y = ((uint16_t)__PERIOD__)
-
 /* HAL层PWM模块接口函数 */
 void HAL_PWM_Init(PWM_InitTypeDef* PWM_Init);
 void HAL_PWM_Start(uint8_t Channel);
 void HAL_PWM_Stop(uint8_t Channel);
+void HAL_PWM_Set_Compare(uint16_t Compare);
+void HAL_PWM_Set_Period(uint16_t Period);
 
 
 #endif

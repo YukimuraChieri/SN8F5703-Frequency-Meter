@@ -15,6 +15,6 @@ void HAL_Delay(uint16_t Delay)
 	uint16_t i, j;
 	for (i = 0; i < Delay; i++)
 	{
-		for (j = 0; j < 1000; j++);
+		for (j = 0; j < 800; j++);
 	}
 }

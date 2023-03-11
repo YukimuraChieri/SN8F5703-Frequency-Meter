@@ -11,7 +11,7 @@ void FML_KEY_Init(void)
 /* °´¼üÉ¨Ãè */
 uint8_t FML_KEY_Scan(void)
 {
-	uint8_t ret = 0, i;
+	uint8_t key_val = 0, i;
 	GPIO_InitTypeDef GPIO_InitStructure;
 	
 	HDL_TM1628_SendCMD(0x42);	/* TM1628¶Á¼üÅÌÃüÁî */
@@ -37,20 +37,20 @@ uint8_t FML_KEY_Scan(void)
 	
 	if (key_buf[1] & 0x08)	/* ¼ì²â°´¼ü1 */
 	{
-		ret |= KEY1;
+		key_val |= KEY1;
 	}
-	else if (key_buf[3] & 0x08)	/* ¼ì²â°´¼ü2 */
+	if (key_buf[3] & 0x08)	/* ¼ì²â°´¼ü2 */
 	{
-		ret |= KEY2;
+		key_val |= KEY2;
 	}
-	else if (key_buf[3] & 0x01)	/* ¼ì²â°´¼ü3 */
+	if (key_buf[3] & 0x01)	/* ¼ì²â°´¼ü3 */
 	{
-		ret |= KEY3;
+		key_val |= KEY3;
 	}
-	else if (key_buf[1] & 0x01)	/* ¼ì²â°´¼ü4 */
+	if (key_buf[1] & 0x01)	/* ¼ì²â°´¼ü4 */
 	{
-		ret |= KEY4;
+		key_val |= KEY4;
 	}
 	
-	return ret;
+	return key_val;
 }

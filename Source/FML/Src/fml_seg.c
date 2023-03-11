@@ -18,7 +18,7 @@ void FML_SEG_Init(void)
 	{
 		HDL_TM1628_WriteByte(0x00);
 	}
-	HDL_TM1628_SendCMD(0x44);	/* 地址固定模式 */
+	HDL_TM1628_SendCMD(0x44);	/* 地址固定模式 */	
 	HDL_TM1628_SendCMD(0x8F);	/* 开启显示 */
 	HAL_GPIO_WritePin(Port2, GPIO_Pin_0, GPIO_PIN_SET);	/* CS引脚置高 */
 }
