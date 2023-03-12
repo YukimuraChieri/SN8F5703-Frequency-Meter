@@ -105,7 +105,7 @@ void HAL_GPIO_WritePin(GPIO_PortTypeDef GPIOx, uint8_t GPIO_Pin, uint8_t pinStat
 	switch(GPIOx)	/* 选择GPIO端口 */
 	{
 		case Port0: {	/* P0端口 */
-			if (1 == pinState)	/* 设置Pin脚输出 */
+			if (GPIO_PIN_SET == pinState)	/* 设置Pin脚输出 */
 			{
 				P0 |= GPIO_Pin;
 			}
@@ -116,7 +116,7 @@ void HAL_GPIO_WritePin(GPIO_PortTypeDef GPIOx, uint8_t GPIO_Pin, uint8_t pinStat
 		}break;
 
 		case Port1: {	/* P1端口 */
-			if (1 == pinState)
+			if (GPIO_PIN_SET == pinState)
 			{
 				P1 |= GPIO_Pin;
 			}
@@ -127,7 +127,7 @@ void HAL_GPIO_WritePin(GPIO_PortTypeDef GPIOx, uint8_t GPIO_Pin, uint8_t pinStat
 		}break;
 
 		case Port2: {	/* P2端口 */
-			if (1 == pinState)
+			if (GPIO_PIN_SET == pinState)
 			{
 				P2 |= GPIO_Pin;
 			}

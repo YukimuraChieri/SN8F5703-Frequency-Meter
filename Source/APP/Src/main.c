@@ -15,7 +15,7 @@
 
 /* 函数声明 */
 void InitPWM(void);								/* PWM初始化函数 */
-void InitTIM2_IC0(void);					/* 初始化定时器2 IC0 */
+void InitTIM2_IC1(void);					/* 初始化定时器2 IC1 */
 void LED_Ring_Disp(uint8_t dir);	/* LED环形显示 */
 uint16_t MeasurementFreq(void);		/* 频率测量 */
 uint16_t median_filter(uint16_t dat);		/* 中值滤波 */
@@ -41,7 +41,7 @@ void main(void)
 	FML_SEG_Init();			/* 初始化数码管 */
 	
 	InitPWM();					/* PWM初始化 */
-	InitTIM2_IC0();			/* 初始化定时器2 IC0 */
+	InitTIM2_IC1();			/* 初始化定时器2 IC1 */
 	
 	while(1)
 	{
@@ -144,8 +144,8 @@ void InitPWM(void)
 	HAL_PWM_Start(PWM_CHANNEL_12);		/* PWM12开始输出 */
 }
 
-/* 初始化定时器2 IC0 */
-void InitTIM2_IC0(void)
+/* 初始化定时器2 IC1 */
+void InitTIM2_IC1(void)
 {
 	TIM2_Base_InitTypeDef TIM2_Base_InitStructure;
 	TIM2_IC_InitTypeDef TIM2_IC_InitStructure;
@@ -165,7 +165,7 @@ void InitTIM2_IC0(void)
 	
 	/* TIM2 IC配置 */
 	TIM2_IC_InitStructure.ICPolarity = TIM2_ICPOLARITY_RISING;	/* 上升沿捕获 */
-	TIM2_IC_InitStructure.ICSelection = TIM2_IC_CHANNEL_1;			/* IC通道0 */
+	TIM2_IC_InitStructure.ICSelection = TIM2_IC_CHANNEL_1;			/* IC通道1 */
 	
 	/* 初始化TIM2 Base和IC */
 	HAL_TIM2_Base_Init(&TIM2_Base_InitStructure);
@@ -230,7 +230,6 @@ uint16_t MeasurementFreq(void)
 			break;
 		}
 	}
-	
 	return freq;
 }
 
